@@ -104,13 +104,21 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 }
 
 /* ---------- rail ---------- */
-.rail{position:sticky;top:var(--gap);display:flex;flex-direction:column;gap:26px}
+.rail{display:flex;flex-direction:column;gap:20px}
+
+/* El carril solo se ancla si cabe entero en la ventana. Anclado por arriba en
+   una pantalla baja, su final —el índice— queda fuera y no aparece hasta que
+   el anclaje se suelta al llegar al pie de la página. */
+@media (min-height:760px) and (min-width:901px){
+  .rail{position:sticky;top:var(--gap)}
+}
+
 .foto{
-  width:132px;height:176px;object-fit:cover;object-position:50% 22%;
-  display:block;border-radius:3px;margin-bottom:20px;
+  width:116px;height:155px;object-fit:cover;object-position:50% 22%;
+  display:block;border-radius:3px;margin-bottom:16px;
   border:1px solid var(--rule);
 }
-@media (max-width:900px){.foto{width:112px;height:150px}}
+@media (max-width:900px){.foto{width:104px;height:139px}}
 @media (max-width:900px){.rail{position:static}}
 
 .name{
@@ -125,7 +133,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 }
 .sub{font-size:15.5px;color:var(--ink-soft);margin:12px 0 0;line-height:1.45}
 
-.fields{margin:0;display:grid;gap:11px;border-top:1px solid var(--rule);padding-top:18px}
+.fields{margin:0;display:grid;gap:9px;border-top:1px solid var(--rule);padding-top:15px}
 .fields > div{display:grid;grid-template-columns:74px minmax(0,1fr);gap:10px;align-items:baseline}
 .fields dt{
   font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
@@ -133,7 +141,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 }
 .fields dd{margin:0;font-family:var(--f-mono);font-size:13px;color:var(--ink);word-break:break-word}
 
-.index{border-top:1px solid var(--rule);padding-top:18px;display:flex;flex-direction:column;gap:7px}
+.index{border-top:1px solid var(--rule);padding-top:15px;display:flex;flex-direction:column;gap:6px}
 .index a{
   font-family:var(--f-mono);font-size:12px;letter-spacing:.03em;
   color:var(--ink-soft);text-decoration:none;display:flex;gap:10px;align-items:baseline;
@@ -351,7 +359,7 @@ img{max-width:100%}
       <div class="figures">
         <div class="fig"><b>10.291</b><span>Productos catalogados</span></div>
         <div class="fig"><b>40</b><span>Fuentes integradas</span></div>
-        <div class="fig"><b>22.400</b><span>Líneas de código propio</span></div>
+        <div class="fig"><b>1.053</b><span>Marcas distintas</span></div>
         <div class="fig"><b>7</b><span>Proyectos fuera de clase</span></div>
       </div>
     </section>
@@ -400,7 +408,6 @@ img{max-width:100%}
           </div>
           <dl class="spec">
             <div><dt>Stack</dt><dd>Kotlin · Jetpack Compose · SQLite · OpenCV</dd></div>
-            <div><dt>Tamaño</dt><dd>47 ficheros, 11.408 líneas</dd></div>
             <div><dt>Datos</dt><dd>Base de 10.291 alimentos empaquetada con la app</dd></div>
             <div><dt>Detalles</dt><dd>Escáner de EAN por cámara (CameraX + ML Kit) · rellenado de fichas desde la foto de la etiqueta · un perfil por sabor con varios códigos de barras · paneles precargados por día para que el cambio de fecha no repinte</dd></div>
             <div><dt>Código</dt><dd><a href="https://github.com/Cerventus04/minutricion-android">github.com/Cerventus04/minutricion-android</a></dd></div>
@@ -415,7 +422,6 @@ img{max-width:100%}
           <p>El sistema que llena esa base. Cuarenta fuentes —Mercadona, Carrefour, Eroski, Alcampo, Prozis, HSN, Danone…— cada una con su HTML y sus rarezas. Extrae la ficha, valida que la nutrición sea físicamente posible, decide si el producto ya está en Open Food Facts (por EAN, por nombre tolerante a erratas o por perfil de macros) y solo guarda lo que aporta algo nuevo. Cuando la web no publica el EAN, lo lee del código de barras de la foto de la etiqueta y exige consenso entre varias escalas antes de darlo por bueno.</p>
           <dl class="spec">
             <div><dt>Stack</dt><dd>Python · Playwright · SQLite · OCR y lectura de códigos de barras</dd></div>
-            <div><dt>Tamaño</dt><dd>54 módulos, 11.024 líneas</dd></div>
             <div><dt>Resultado</dt><dd>10.291 productos · 5.883 con EAN · 1.053 marcas · macros completos en el 100 %</dd></div>
             <div><dt>Operación</dt><dd>Checkpoint y reanudación por fuente · caché e índice local para no depender de la red · panel de control · auditoría en Excel con la URL de origen de cada dato</dd></div>
             <div><dt>Código</dt><dd><a href="https://github.com/Cerventus04/scraper-alimentos">github.com/Cerventus04/scraper-alimentos</a></dd></div>
@@ -430,7 +436,6 @@ img{max-width:100%}
           <p>Procesamiento automático de apuntes en PDF: detecta y elimina las páginas de publicidad insertadas, recorta los márgenes sobrantes y devuelve el documento limpio. Funciona como ejecutable de escritorio y como extensión de Chrome, que añade el botón a la propia página y hace el trabajo en el navegador con la sesión del usuario.</p>
           <dl class="spec">
             <div><dt>Stack</dt><dd>Python · JavaScript · Chrome Manifest V3 · pdf.js · pdf-lib</dd></div>
-            <div><dt>Tamaño</dt><dd>902 líneas + la extensión</dd></div>
             <div><dt>Detalles</dt><dd>Service worker, content scripts y empaquetado a ejecutable con PyInstaller</dd></div>
             <div><dt>Código</dt><dd><a href="https://github.com/Cerventus04/limpiador-pdf">github.com/Cerventus04/limpiador-pdf</a></dd></div>
           </dl>
@@ -444,7 +449,6 @@ img{max-width:100%}
           <p>Un resolver DNS local que no se fía de las listas publicadas. Resuelve por DNS-over-HTTPS con failover entre tres upstreams y, cuando una web no carga, abre un handshake TLS real contra cada IP devuelta para ver cuál responde de verdad desde esa conexión; si ninguna funciona, sondea direcciones hermanas dentro del mismo prefijo anycast. Actúa solo cuando el fallo es real, así que no produce falsos positivos.</p>
           <dl class="spec">
             <div><dt>Stack</dt><dd>Python · DNS-over-HTTPS · TLS/SNI · asyncio</dd></div>
-            <div><dt>Tamaño</dt><dd>5.309 líneas</dd></div>
             <div><dt>Detalles</dt><dd>Seis prefijos de CDN de serie · memoria de las IP que sí funcionaron · retirada del flag AD de DNSSEC al reescribir</dd></div>
           </dl>
         </article>
@@ -482,7 +486,6 @@ img{max-width:100%}
           <p>Por afición: desensamblar juegos de Nintendo DS para entender cómo guardan sus datos y su lógica. Localizar estructuras en memoria, escribir parches en ensamblador ARM sobre los overlays del juego y generar documentación consultable a partir de los ficheros de la ROM. Es lo que más me ha enseñado sobre leer código que nadie escribió para que yo lo leyera.</p>
           <dl class="spec">
             <div><dt>Stack</dt><dd>Ensamblador ARM · Python · análisis de binarios</dd></div>
-            <div><dt>Tamaño</dt><dd>5.765 líneas de utilidades propias</dd></div>
           </dl>
         </article>
 
@@ -516,7 +519,7 @@ img{max-width:100%}
     <section id="tecnologias">
       <div class="head"><h2>Tecnologías</h2></div>
       <dl class="stack">
-        <div><dt>Backend</dt><dd>Python (proyectos propios de más de 10.000 líneas) · Django y Django REST Framework · C# y .NET con Entity Framework y ADO.NET · Java</dd></div>
+        <div><dt>Backend</dt><dd>Python · Django y Django REST Framework · C# y .NET con Entity Framework y ADO.NET · Java</dd></div>
         <div><dt>Web</dt><dd>Vue 3 con Vite · JavaScript (ES6, extensiones Chrome Manifest V3, service workers) · HTML · CSS</dd></div>
         <div><dt>Bases de datos</dt><dd>SQL · SQLite · MySQL · SQL Server (Analysis Services, MDX)</dd></div>
         <div><dt>Móvil</dt><dd>Kotlin con Jetpack Compose · Swift</dd></div>
